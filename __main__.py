@@ -102,7 +102,7 @@ def main():
         x2 = lu[0] + (rd[0] - lu[0]) / 6 * (pos2 % 7)
         y2 = lu[1] + (rd[1] - lu[1]) / 6 * (pos2 // 7)
 
-        moveTo(x1, y1)
+        moveTo(x1, y1, _pause=False)
         dragTo(x2, y2, button="left", duration=MOVE_DURATION, _pause=False)
         board["board"][pos1] = ""
         board["board"][pos2] = RANKS[RANKS.index(board["board"][pos2]) + 1]
