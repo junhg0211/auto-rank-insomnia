@@ -74,7 +74,7 @@ def save_board(board: Board):
         dump(board, f, ensure_ascii=False, indent=2)
 
 
-MOVE_DURATION = 0.3
+MOVE_DURATION = 0.2
 
 
 def main():
@@ -87,8 +87,8 @@ def main():
     rd = position() if input("RD") is not None else (0, 0)
     new = position() if input("NEW") is not None else (0, 0)
 
-    moveTo(new)
-    click()
+    moveTo(new, _pause=False)
+    click(_pause=False)
     sleep(MOVE_DURATION)
 
     while True:
@@ -103,13 +103,13 @@ def main():
         y2 = lu[1] + (rd[1] - lu[1]) / 6 * (pos2 // 7)
 
         moveTo(x1, y1)
-        dragTo(x2, y2, MOVE_DURATION, button="left")
+        dragTo(x2, y2, button="left", duration=MOVE_DURATION, _pause=False)
         board["board"][pos1] = ""
         board["board"][pos2] = RANKS[RANKS.index(board["board"][pos2]) + 1]
 
         # new piece
-        moveTo(new)
-        click()
+        moveTo(new, _pause=False)
+        click(_pause=False)
         board["board"][board["board"].index("")] = board["new"]
 
         # save board
@@ -120,6 +120,7 @@ def main():
             try:
                 sleep(board["wait"] - MOVE_DURATION)
             except KeyboardInterrupt:
+                print("SAVING BOARD")
                 save_board(board)
                 break
 
