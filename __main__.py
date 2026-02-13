@@ -74,7 +74,7 @@ def save_board(board: Board):
         dump(board, f, ensure_ascii=False, indent=2)
 
 
-MOVE_DURATION = 0.2
+MOVE_DURATION = 0.15
 
 
 def main():
