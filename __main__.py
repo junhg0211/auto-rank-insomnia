@@ -114,11 +114,14 @@ def main():
 
         # save board
         print_board(board)
-        save_board(board)
         if newing > 0:
             newing -= 1
         else:
-            sleep(board["wait"] - MOVE_DURATION)
+            try:
+                sleep(board["wait"] - MOVE_DURATION)
+            except KeyboardInterrupt:
+                save_board(board)
+                break
 
 
 if __name__ == "__main__":
